@@ -1,0 +1,43 @@
+<!-- For HCAPTCHA -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>hCAPTCHA</title>
+    <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+</head>
+<body style='background-color: aqua;'>
+<div style='height: 60px;'></div>
+<form action="?" method="POST">
+    <div class="h-captcha"
+         data-sitekey="692c9487-c30d-497a-b463-93556b2c77b7"
+         data-callback="captchaCallback"></div>
+
+</form>
+<script>
+    var scriptLoaded = false;
+    <!--  Loading main page  -->
+    function loadMainDartJs() {
+      if (scriptLoaded) {
+        return;
+      }
+      scriptLoaded = true;
+      var scriptTag = document.createElement('script');
+      scriptTag.src = 'main.dart.js';
+      scriptTag.type = 'application/javascript';
+      document.body.append(scriptTag);
+    }
+      function captchaCallback(response){
+        if(typeof Captcha!=="undefined"){
+          Captcha.postMessage(response);
+        } else {
+          <!--    If you are human    -->
+          loadMainDartJs();
+        }
+      }
+
+    </script>
+</body>
+</html>
+
+<html>
+<body>
